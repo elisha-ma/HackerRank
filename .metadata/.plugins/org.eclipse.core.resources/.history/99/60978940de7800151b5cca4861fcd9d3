@@ -1,0 +1,44 @@
+package closest_numbers;
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    static void findPair(int[] nums, int N) {
+      /* Complete this function */
+    	Arrays.sort(nums);
+    	int[] pair = new int[N];
+    	int min = Integer.MAX_VALUE;
+    	
+    	for (int i = 0; i < N-1; i++) {
+    		int diff = Math.abs(nums[i] - nums[i+1]);
+    		if (diff < min) {
+    			min = diff;
+    			pair[0] = nums[i];
+    			pair[1] = nums[i+1];
+    		}
+    	}
+    	
+    	System.out.println(pair[0] + " " + pair[1]);
+    	
+    	
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int N = Integer.parseInt(in.nextLine());
+        String[] numString = in.nextLine().split(" ");
+        int[] nums = new int[N];
+        
+        for(int i = 0; i < N; i++) {
+        	nums[i] = Integer.parseInt(numString[i]);
+        }
+        
+        findPair(nums, N);
+        
+        in.close();
+    }
+}

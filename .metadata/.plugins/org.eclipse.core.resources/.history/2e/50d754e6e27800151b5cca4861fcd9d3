@@ -1,0 +1,45 @@
+package angry_children;
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    static void calculateUnfairness(int[] nums, int N, int K) {
+      /* Complete this function */
+    	Arrays.sort(nums);
+    	int min = nums[0];
+    	int max = nums[K-1];
+    	int minUnfairness = max - min;
+    	
+    	for (int i = 1; i <= N - K; i++) {
+    		min = nums[i];
+    		max = nums[i+K-1];
+    		int unfairness = max - min;
+    		
+    		if (unfairness < minUnfairness) {
+    			minUnfairness = unfairness;
+    		}
+    	}
+    	
+    	System.out.println(minUnfairness);
+    	
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int N = Integer.parseInt(in.nextLine());
+        int K = Integer.parseInt(in.nextLine());
+        int[] nums = new int[N];
+        
+        for (int i = 0; i < N; i++ ){
+        	nums[i] = Integer.parseInt(in.nextLine());
+        }
+        
+        calculateUnfairness(nums, N, K);
+        
+        in.close();
+    }
+}

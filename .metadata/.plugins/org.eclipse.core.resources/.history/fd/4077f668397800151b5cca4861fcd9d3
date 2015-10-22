@@ -1,0 +1,61 @@
+package maxsubarray;
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    static void findMaxSubArray(int[] nums, int N) {
+      /* Complete this function */
+    	
+    	int bestSum = 0;
+    	int currentSum = 0;
+    	int nonContiguousSum = 0;
+    	int threshold = nums[0];
+    	
+    	for(int i = 0; i < N; i++) {
+    		if (nums[i] < threshold)
+    			threshold = nums[i];
+    	}
+    	for (int i = 0; i < N; i++) {
+    		int val = currentSum + nums[i];
+    		
+    		if (val >= threshold) {
+    			currentSum = val;	
+    		} else {
+    			currentSum = 0;
+    		}
+    		
+    		if (currentSum > bestSum) {
+    			bestSum = currentSum;
+    		}
+    		if (nums[i] > 0) {
+    			nonContiguousSum += nums[i];
+    		}
+    	}
+    	
+    	System.out.println(bestSum + " " + nonContiguousSum);
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int T = Integer.parseInt(in.nextLine());
+        
+        for (int a = 0; a < T; a++) {
+	        
+        	int N = Integer.parseInt(in.nextLine());
+        	String[] numString = in.nextLine().split(" ");
+        	int[] nums = new int[N];
+        	
+        	for(int i = 0; i < N; i++) {
+        		nums[i] = Integer.parseInt(numString[i]);
+        	}
+        	
+        	findMaxSubArray(nums, N);
+        }
+        
+        in.close();
+    }
+}

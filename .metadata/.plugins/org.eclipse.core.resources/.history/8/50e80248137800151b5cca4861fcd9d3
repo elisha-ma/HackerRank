@@ -1,0 +1,47 @@
+package gem_stones;
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    static void findGems(String[] strings, int N) {
+      /* Complete this function */
+    	HashMap<String, Integer> track = new HashMap<String, Integer>();
+    	
+    	int sum = 0;
+    	for (int i = 0; i < N; i++) {
+    		for (int j = 0; j < strings[i].length(); j++) {
+    			if (track.get(strings[i].substring(j, j+1)) == null) {
+    				track.put(strings[i].substring(j, j+1), 0);
+    			}
+    			track.put(strings[i].substring(j, j+1), track.get(strings[i].substring(j, j+1)) + i);
+    		}
+    		sum += i;
+    	}
+    	int num = 0;
+    	for (String key : track.keySet()) {
+    		if (track.get(key) == sum) {
+    			num++;
+    		}
+    	}
+    	
+    	System.out.println(num);
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int N = Integer.parseInt(in.nextLine());
+        
+        String[] strings = new String[N];
+        
+        for (int i = 0; i < N; i++ ){
+        	strings[i] = in.nextLine();
+        }
+        
+        findGems(strings, N);
+        in.close();
+    }
+}

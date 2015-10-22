@@ -1,0 +1,61 @@
+package the_love_letter_mystery;
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    void removeEdges(HashMap<String, ArrayList<String>> map) {
+      /* Complete this function */
+    	Integer count = 0;
+    	
+    	countVertices("1", map, count);
+    	
+    	System.out.println(count);
+    	
+    }
+    
+    int countVertices(String node, HashMap<String, ArrayList<String>> map, Integer count) {
+    	int vertices = 1;
+    	if (map.get(node).size() != 0) {
+    		
+    		for (String child : map.get(node)) {
+    			int childVertex = countVertices(child, map, count);
+    			if (childVertex % 2 == 0) {
+    				count++;
+    			} else {
+    				vertices += childVertex;
+    			}
+    		}
+    	}
+    	
+    	return vertices;
+    	
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        
+        String[] n_k = in.nextLine().split(" ");
+        int N = Integer.parseInt(n_k[0]);
+        int K = Integer.parseInt(n_k[1]);
+        
+        HashMap<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
+        
+        for (int i = 0; i < K; i++ ){
+        	String[] u_v = in.nextLine().split(" ");
+        	if (map.get(u_v[1]) == null) {
+        		map.put(u_v[i], new ArrayList<String>());
+        	}
+        	
+        	map.get(u_v[1]).add(u_v[0]);
+        }
+        
+        removeEdges(map);
+        
+        in.close();
+    }
+}

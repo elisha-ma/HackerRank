@@ -1,0 +1,72 @@
+package string_reduction;
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    static void parlor(int[] prices ,int totalDollars, int numIceCreams) {
+      /* Complete this function */
+    	
+    	HashMap<Integer, ArrayList<Integer>> map = new HashMap<Integer, ArrayList<Integer>>();
+    	
+    	for (int i = 0; i < numIceCreams; i++) {
+    		if (map.get(prices[i]) == null) {
+    			map.put(prices[i], new ArrayList<Integer>());
+    		} 
+    		map.get(prices[i]).add(i);
+    		
+    	}
+    	
+    	for (int i = 0; i < numIceCreams; i++) {
+    		ArrayList<Integer> indeces = map.get(totalDollars-prices[i]);
+    		if (indeces != null) {
+    			int index = -1;
+    			Iterator<Integer> itr = indeces.iterator();
+    			while(itr.hasNext()) {
+    				Integer now = itr.next();
+    				if (now != i) {
+    					index = now;
+    					break;
+    				}
+    			}
+    			if (index == -1) {
+    				continue;
+    			}
+    			int iPlusOne = i+1;
+    			int indexPlusOne = index + 1;
+    			if (indexPlusOne < iPlusOne) {
+    				System.out.println(indexPlusOne + " " + iPlusOne);
+    			} else
+    				System.out.println(iPlusOne + " " + indexPlusOne);
+    			return;
+    		}
+    	}
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int T = Integer.parseInt(in.nextLine());
+        
+        for (int a = 0; a < T; a++) {
+	        int totalDollars = Integer.parseInt(in.nextLine());
+	        
+	        int numIceCreams = Integer.parseInt(in.nextLine());
+	        
+	        int[] prices = new int[numIceCreams];
+	        String next = in.nextLine();
+	        String[] next_split = next.split(" ");
+	        
+	        
+	        for (int i = 0; i < numIceCreams; i++) {
+	        	prices[i] = Integer.parseInt(next_split[i]);
+	        }
+	
+	        parlor(prices, totalDollars, numIceCreams);
+        }
+        
+        in.close();
+    }
+}

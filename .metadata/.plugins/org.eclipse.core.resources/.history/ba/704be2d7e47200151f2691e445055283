@@ -1,0 +1,56 @@
+package icecream_parlor;
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    static void parlor(int[] prices ,int totalDollars, int numIceCreams) {
+      /* Complete this function */
+    	
+    	HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+    	
+    	for (int i = 0; i < numIceCreams; i++) {
+    		map.put(prices[i], i);
+    	}
+    	
+    	for (int i = 0; i < numIceCreams; i++) {
+    		Integer index = map.get(totalDollars-prices[i]);
+    		if (index != null) {
+    			int iPlusOne = i+1;
+    			int indexPlusOne = index.intValue()+ 1;
+    			if (indexPlusOne < iPlusOne) {
+    				System.out.println(indexPlusOne + " " + iPlusOne);
+    			} else
+    				System.out.println(iPlusOne + " " + indexPlusOne);
+    			return;
+    		}
+    	}
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int T = Integer.parseInt(in.nextLine());
+        
+        for (int a = 0; a < T; a++) {
+	        int totalDollars = Integer.parseInt(in.nextLine());
+	        
+	        int numIceCreams = Integer.parseInt(in.nextLine());
+	        
+	        int[] prices = new int[numIceCreams];
+	        String next = in.nextLine();
+	        String[] next_split = next.split(" ");
+	        
+	        
+	        for (int i = 0; i < numIceCreams; i++) {
+	        	prices[i] = Integer.parseInt(next_split[i]);
+	        }
+	
+	        parlor(prices, totalDollars, numIceCreams);
+        }
+        
+        in.close();
+    }
+}

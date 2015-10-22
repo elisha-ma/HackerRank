@@ -1,0 +1,55 @@
+package the_love_letter_mystery;
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+	class Node {
+		int[] children;
+		int self;
+		
+		Node(int self) {
+			this.self = self;
+		}
+		
+		public boolean equals(Node n) {
+			return n.self == this.self;
+		}
+	}
+    static void makePalindrome(String string) {
+      /* Complete this function */
+    	
+    	int length = string.length();
+    	
+    	int ops = 0;
+    	for (int i = 0; i < length/2; i++ ) {
+    		ops += Math.abs(string.charAt(i) - string.charAt(length - i - 1));
+    	}
+    	
+    	System.out.println(ops);
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        
+        String[] n_k = in.nextLine().split(" ");
+        int N = Integer.parseInt(n_k[0]);
+        int K = Integer.parseInt(n_k[1]);
+        
+        HashMap<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
+        
+        for (int i = 0; i < K; i++ ){
+        	String[] u_v = in.nextLine().split(" ");
+        	if (map.get(u_v[1]) == null) {
+        		map.put(u_v[i], new ArrayList<String>());
+        	}
+        	
+        	map.get(u_v[1]).add(u_v[0]);
+        }
+        
+        in.close();
+    }
+}

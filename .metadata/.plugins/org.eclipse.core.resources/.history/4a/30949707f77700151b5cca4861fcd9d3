@@ -1,0 +1,25 @@
+package find_hackerrank;
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    static void findHackerrank(String[] sentence) {
+      /* Complete this function */
+    	
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int N = Integer.parseInt(in.nextLine());
+        
+        for (int i = 0; i < N; i++ ){
+        	findHackerrank(in.nextLine().split(" " ));
+        }
+        
+        in.close();
+    }
+}
